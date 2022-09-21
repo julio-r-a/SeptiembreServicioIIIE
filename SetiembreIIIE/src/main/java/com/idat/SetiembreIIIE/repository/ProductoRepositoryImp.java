@@ -3,11 +3,12 @@ package com.idat.SetiembreIIIE.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.idat.SetiembreIIIE.model.Producto;
 
-@Service
+@Repository
 public class ProductoRepositoryImp implements ProductoRepository{
 	
 	
@@ -23,8 +24,8 @@ public class ProductoRepositoryImp implements ProductoRepository{
 	public void actualizar(Producto producto) {
 		
 		Producto existeActualizar = obtener(producto.getIdProducto());
-		eliminar(producto.getIdProducto());
-		almacenamiento.add(existeActualizar);		
+		eliminar(existeActualizar.getIdProducto());
+		almacenamiento.add(producto);		
 	}
 
 	@Override
