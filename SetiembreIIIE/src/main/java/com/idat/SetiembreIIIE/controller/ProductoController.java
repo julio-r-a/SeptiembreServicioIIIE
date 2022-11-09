@@ -20,55 +20,55 @@ public class ProductoController {
 
 	@Autowired
 	private ProductoService service;
-
+	
 	@RequestMapping(path = "/listar", method = RequestMethod.GET)
-	public ResponseEntity<List<Producto>> listar() {
-		return new ResponseEntity<List<Producto>>(service.listar(), HttpStatus.OK);
+	public ResponseEntity<List<Producto>> listar(){
+		return new ResponseEntity<List<Producto>>(service.listar(), HttpStatus.OK) ;
 	}
-
-	@RequestMapping(path = "/guardar", method = RequestMethod.POST)
-	public ResponseEntity<Void> guardar(@RequestBody Producto producto) {
+	
+	@RequestMapping(path="/guardar", method = RequestMethod.POST)
+	public ResponseEntity<Void> guardar(@RequestBody Producto producto ){
 		service.guardar(producto);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-
+	
 	@RequestMapping(path = "/listar/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Producto> obtenerPodId(@PathVariable Integer id) {
-
+	public ResponseEntity<Producto> obtenerPorId(@PathVariable Integer id){
+		
 		Producto producto = service.obtener(id);
-
-		if (producto != null) {
+		
+		if( producto != null) {
 			return new ResponseEntity<Producto>(producto, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Producto>(producto, HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<Producto>(HttpStatus.NOT_FOUND);
 		}
+		
 	}
-
+	
 	@RequestMapping(path = "/editar", method = RequestMethod.PUT)
-	public ResponseEntity<Void> editar(@RequestBody Producto producto) {
+	public ResponseEntity<Void> editar(@RequestBody Producto producto){
+		
 		Producto p = service.obtener(producto.getIdProducto());
-
-		if (p != null) {
+		
+		if( p != null) {
 			service.actualizar(producto);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} else {
+		}else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-
 		}
-
+		
 	}
 	
 	@RequestMapping(path = "/eliminar/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-		Producto producto = service.obtener(id);
+	public ResponseEntity<Void>eliminar(@PathVariable Integer id){
 		
-		if (producto != null) {
+		Producto producto = service.obtener(id);
+
+		if(producto != null) {
 			service.eliminar(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} else {
+		}else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-
 		}
-		
 	}
 }

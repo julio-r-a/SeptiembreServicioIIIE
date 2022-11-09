@@ -1,6 +1,5 @@
 package com.idat.SetiembreIIIE.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,41 +18,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name="productos")
 public class Producto {
-		
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProducto;
-	private String nombreProducto;
+	private String nombreProducto ;
 	private String descripcion;
 	private Double precio;
-	private Integer stock;
+	private Integer stock; 
 	
 	@OneToOne
-	private Provedor provedor;
+	private Proveedor proveedor;
 	
-	
-	@ManyToMany ( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinTable(
-			name="producto_cliente",			
+			name="producto_cliente",
 			joinColumns = @JoinColumn(
 					name="id_producto",
 					nullable = false,
 					unique = true,
-					foreignKey =  @ForeignKey(foreignKeyDefinition = "foreign key (id_producto) references productos(id_producto)")
-					),
-			
-				inverseJoinColumns = @JoinColumn(
+					foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_producto) references productos(id_producto)")
+			),
+			inverseJoinColumns = @JoinColumn(
 					name="id_cliente",
 					nullable = false,
 					unique = true,
-					foreignKey =  @ForeignKey(foreignKeyDefinition = "foreign key (id_cliente) references clientes(id_cliente)")
-					) 						
-			)			
-	
-
+					foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_cliente) references clientes(id_cliente)")
+			)
+	)
 	private List<Cliente> clientes = new ArrayList<>();
 	
-		
+	
 	public Integer getIdProducto() {
 		return idProducto;
 	}
@@ -84,5 +79,5 @@ public class Producto {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	
+
 }

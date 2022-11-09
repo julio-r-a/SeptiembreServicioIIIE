@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="items")
 public class Item {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idItem;
@@ -20,16 +20,13 @@ public class Item {
 	private Integer cantidad;
 	private Double total;
 	
-	
-	@ManyToOne //unico cliente
+	@ManyToOne
 	@JoinColumn(
-			name ="id_cliente",
+			name="id_cliente",
 			nullable = false,
 			unique = true,
-			foreignKey =  @ForeignKey(foreignKeyDefinition = "foreign key (id_cliente) references clientes(id_cliente)")
-
-			)
-		
+			foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key (id_cliente) references clientes(id_cliente)")
+	)
 	private Cliente cliente;
 	
 	public Integer getIdItem() {

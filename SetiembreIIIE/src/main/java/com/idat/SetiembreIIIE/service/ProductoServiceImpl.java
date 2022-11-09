@@ -9,36 +9,39 @@ import com.idat.SetiembreIIIE.model.Producto;
 import com.idat.SetiembreIIIE.repository.ProductoRepository;
 
 @Service
-public class ProductoServiceImpl implements ProductoService{
-	
-	@Autowired
-	private ProductoRepository repository;
+public class ProductoServiceImpl implements ProductoService {
 
+	@Autowired
+	private ProductoRepository rerpositorio;
+	
 	@Override
 	public void guardar(Producto producto) {
-		repository.save(producto);		
+		// TODO Auto-generated method stub
+		rerpositorio.save(producto);
 	}
 
 	@Override
 	public void actualizar(Producto producto) {
-		repository.saveAndFlush(producto);		
-		
+		// TODO Auto-generated method stub
+		rerpositorio.saveAndFlush(producto);
 	}
 
 	@Override
 	public void eliminar(Integer id) {
-		repository.deleteById(id);		
-		
+		// TODO Auto-generated method stub
+		rerpositorio.deleteById(id);
 	}
 
 	@Override
 	public List<Producto> listar() {
-		return repository.findAll();		
+		// TODO Auto-generated method stub
+		return rerpositorio.findAll();
 	}
 
 	@Override
 	public Producto obtener(Integer id) {
-		return repository.findById(id).orElse(null);		
+		// TODO Auto-generated method stub
+		return rerpositorio.findById(id).orElse(null);
 	}
 
 }
